@@ -14,17 +14,9 @@
 
 // module.exports = getUserPosts;
 
-const fetchUser = () => Promise.resolve({ id: 1 });
-const fetchPosts = () => Promise.resolve(["post1", "post2"]);
-
-async function getUserPosts(userId) {
-  fetchUser(userId)
-    .then((user) => {
-      fetchPosts(user.id).then((post) => {
-        console.log(post);
-        return post;
-      });
-    })
+function getUserPosts(userId) {
+  return fetchUser(userId)
+    .then((user) => fetchPosts(user.id).then((post) => post))
     .catch((e) => {
       console.error("error");
     });
